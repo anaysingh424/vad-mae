@@ -1,0 +1,13 @@
+{"test_micro": 1.0, "test_macro": 1.0, "epoch": 0}
+{"test_micro": 1.0, "test_macro": 1.0, "epoch": 1}
+{"test_micro": 1.0, "test_macro": 1.0, "epoch": 2}
+{"test_micro": 0.7683907690246118, "test_macro": 0.7954426793324717, "epoch": 0}
+{"test_micro": 0.8159868896771474, "test_macro": 0.8162523339729516, "epoch": 1}
+{"test_micro": 0.8427446812972905, "test_macro": 0.8294242370331543, "epoch": 2}
+{"test_micro": 0.844664328926972, "test_macro": 0.8278559053335466, "epoch": 3}
+{"test_micro": 0.8374786422265313, "test_macro": 0.8524722542049965, "epoch": 4}
+{"test_micro": 0.8320951423616474, "test_macro": 0.8292131730288188, "epoch": 5}
+{"test_micro": 0.8382073724268593, "test_macro": 0.8346485783821552, "epoch": 6}
+{"test_micro": 0.8386726220348748, "test_macro": 0.8381110627980688, "epoch": 7}
+{"test_micro": 0.8405533635314835, "test_macro": 0.8416445156068284, "epoch": 8}
+{"test_micro": 0.8407053456887643, "test_macro": 0.8425786044404896, "epoch": 9}

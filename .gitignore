@@ -1,0 +1,36 @@
+# Environments
+venv/
+venv311/
+venv*/
+__pycache__/
+*.pyc
+
+# Massive Files
+*.zip
+*.tar
+*.gz
+*.pth
+*.pt
+events.out.tfevents.*
+logs/
+*.log
+
+# Extractions
+Avenue_Extracted/
+data/avenue/gt_txt_labels/
+*.mat
+*.avi
+*.mp4
+data/
+datasets/
+__MACOSX/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.gemini/
+.tempmediaStorage/
+brain/
+docs/*.pdf
