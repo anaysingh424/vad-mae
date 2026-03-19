@@ -17,7 +17,7 @@ The baseline model was rapidly trained from scratch over 10 epochs. Without requ
 ![AUC Graph](docs/auc_training_graph.png)
 
 ### System Architecture Flow
-![Architecture Flow](docs/architecture_diagram.html)
+![Architecture Flow](architecture%20mae.jpg)
 
 ---
 *End of Report*
