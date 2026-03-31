@@ -24,7 +24,7 @@ def extract_videos(in_dir, out_dir):
 
 import sys
 if __name__ == '__main__':
-    in_base_path = sys.argv[1] if len(sys.argv) > 1 else r"C:\Users\Anay\.gemini\antigravity\scratch\vad\Avenue_Extracted\Avenue Dataset"
+    in_base_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.getcwd(), "Avenue_Extracted", "Avenue Dataset")
     out_base_path = sys.argv[2] if len(sys.argv) > 2 else in_base_path
     train_dir = "training_vol" if os.path.exists(os.path.join(in_base_path, "training_vol")) else "training_videos"
     test_dir = "testing_vol" if os.path.exists(os.path.join(in_base_path, "testing_vol")) else "testing_videos"
