@@ -1,0 +1,9 @@
+torch
+torchvision
+timm
+ml_collections
+opencv-python
+scipy
+tqdm
+scikit-learn
+Pillow
