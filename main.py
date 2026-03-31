@@ -1,3 +1,5 @@
+# pyre-ignore-all-errors
+# pyright: reportMissingImports=false, reportGeneralTypeIssues=false
 import argparse
 import datetime
 import json
@@ -127,11 +129,20 @@ def do_training(args, data_loader_test, data_loader_train, device, log_writer, m
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', type=str, default='avenue')
-    args = parser.parse_args()
-    if args.dataset == 'avenue':
+    parser.add_argument('--epochs', type=int, default=None)
+    parser.add_argument('--batch_size', type=int, default=None)
+    args_cmd = parser.parse_args()
+    
+    if args_cmd.dataset == 'avenue':
         args = get_configs_avenue()
     else:
-        args = get_configs_shanghai()#
+        args = get_configs_shanghai()
+        
+    if args_cmd.epochs is not None:
+        args.epochs = args_cmd.epochs
+    if args_cmd.batch_size is not None:
+        args.batch_size = args_cmd.batch_size
+        
     if args.output_dir:
         Path(args.output_dir).mkdir(parents=True, exist_ok=True)
     main(args)
