@@ -95,10 +95,13 @@ def test_one_epoch(model: torch.nn.Module, data_loader: Iterable,
     labels = []
     videos = []
     import gc
-    for i, (samples, samples_abnormal, labels, video_name, _, grads, targets) in enumerate(metric_logger.log_every(data_loader, args.print_freq, header)):
-        if i % 20 == 0:
+    for data_iter_step, (samples, grads, targets, label, vid, _) in enumerate(metric_logger.log_every(data_loader, args.print_freq, header)):
+        if data_iter_step % 20 == 0:
             gc.collect()
             torch.cuda.empty_cache()
+
+        videos += list(vid)  # type: ignore
+        labels += list(label.detach().cpu().numpy())  # type: ignore
 
         samples = samples.to(device)
         grads = grads.to(device)
