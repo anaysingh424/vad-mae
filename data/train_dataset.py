@@ -11,9 +11,26 @@ import torch.utils.data  # type: ignore
 
 _original_imread = cv2.imread
 ENABLE_RAM_CACHE = False
+USE_NPY_MONOLITH = False
+
 GLOBAL_IMG_CACHE = {}
+GLOBAL_MMAP_BUFFERS = {}
+GLOBAL_MMAP_DICT = {}
+
+def init_mmaps():
+    if not GLOBAL_MMAP_BUFFERS:
+        GLOBAL_MMAP_BUFFERS['t_n'] = np.load('train_data.npy', mmap_mode='r')
+        GLOBAL_MMAP_BUFFERS['t_a'] = np.load('train_abnormal.npy', mmap_mode='r')
+        GLOBAL_MMAP_BUFFERS['t_g'] = np.load('train_grads.npy', mmap_mode='r')
+        GLOBAL_MMAP_BUFFERS['t_m'] = np.load('train_masks.npy', mmap_mode='r')
 
 def _cached_imread(filename, flags=None):
+    if USE_NPY_MONOLITH:
+        if filename in GLOBAL_MMAP_DICT:
+            typ, idx = GLOBAL_MMAP_DICT[filename]
+            img = GLOBAL_MMAP_BUFFERS[typ][idx]
+            return np.array(img).copy() # Avoid memory locking bugs
+        
     if not ENABLE_RAM_CACHE:
         return _original_imread(filename) if flags is None else _original_imread(filename, flags)
     if filename not in GLOBAL_IMG_CACHE:
@@ -40,6 +57,13 @@ class AbnormalDatasetGradientsTrain(torch.utils.data.Dataset):
         self.percent_abnormal = args.percent_abnormal
         self.input_3d = args.input_3d
         self.abnormal_data, self.data, self.gradients, self.masks_abnormal = self._read_data(data_path)
+        
+        if USE_NPY_MONOLITH:
+            init_mmaps()
+            for i, p in enumerate(self.abnormal_data): GLOBAL_MMAP_DICT[p] = ('t_a', i)
+            for i, p in enumerate(self.data): GLOBAL_MMAP_DICT[p] = ('t_n', i)
+            for i, p in enumerate(self.gradients): GLOBAL_MMAP_DICT[p] = ('t_g', i)
+            for i, p in enumerate(self.masks_abnormal): GLOBAL_MMAP_DICT[p] = ('t_m', i)
 
     def _read_data(self, data_path):
         data = []
