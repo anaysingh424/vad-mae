@@ -1,7 +1,7 @@
 import time
-import torch
-from data.train_dataset import AbnormalDatasetGradientsTrain
-from configs.configs import get_configs_avenue
+import torch  # type: ignore
+from data.train_dataset import AbnormalDatasetGradientsTrain  # type: ignore
+from configs.configs import get_configs_avenue  # type: ignore
 
 class Args:
     def __init__(self):

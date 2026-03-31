@@ -1,5 +1,5 @@
-import scipy.io
-import numpy as np
+import scipy.io  # type: ignore
+import numpy as np  # type: ignore
 import os
 
 mat_path = r"C:\Users\Anay\Downloads\Avenue_Dataset\Avenue Dataset\testing_vol\vol01.mat"

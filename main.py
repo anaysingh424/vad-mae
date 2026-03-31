@@ -5,17 +5,17 @@ import os
 import time
 from pathlib import Path
 
-from timm.optim import optim_factory
-from timm.utils import NativeScaler
-from torch.utils.tensorboard import SummaryWriter
+from timm.optim import optim_factory  # type: ignore
+from timm.utils import NativeScaler  # type: ignore
+from torch.utils.tensorboard import SummaryWriter  # type: ignore
 
-from configs.configs import get_configs_avenue, get_configs_shanghai
-from data.test_dataset import AbnormalDatasetGradientsTest
-from data.train_dataset import AbnormalDatasetGradientsTrain
-from engine_train import train_one_epoch, test_one_epoch
-from inference import inference
-from model.model_factory import mae_cvt_patch16, mae_cvt_patch8
-from util import misc
+from configs.configs import get_configs_avenue, get_configs_shanghai  # type: ignore
+from data.test_dataset import AbnormalDatasetGradientsTest  # type: ignore
+from data.train_dataset import AbnormalDatasetGradientsTrain  # type: ignore
+from engine_train import train_one_epoch, test_one_epoch  # type: ignore
+from inference import inference  # type: ignore
+from model.model_factory import mae_cvt_patch16, mae_cvt_patch8  # type: ignore
+from util import misc  # type: ignore
 import torch
 
 def main(args):

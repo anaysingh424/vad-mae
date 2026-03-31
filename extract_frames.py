@@ -1,7 +1,7 @@
 import os
-import cv2
+import cv2  # type: ignore
 import glob
-from tqdm import tqdm
+from tqdm import tqdm  # type: ignore
 
 def extract_videos(in_dir, out_dir):
     os.makedirs(out_dir, exist_ok=True)
