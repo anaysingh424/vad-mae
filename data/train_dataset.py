@@ -9,6 +9,19 @@ import cv2  # type: ignore
 import numpy as np  # type: ignore
 import torch.utils.data  # type: ignore
 
+_original_imread = cv2.imread
+ENABLE_RAM_CACHE = False
+GLOBAL_IMG_CACHE = {}
+
+def _cached_imread(filename, flags=None):
+    if not ENABLE_RAM_CACHE:
+        return _original_imread(filename) if flags is None else _original_imread(filename, flags)
+    if filename not in GLOBAL_IMG_CACHE:
+        GLOBAL_IMG_CACHE[filename] = _original_imread(filename) if flags is None else _original_imread(filename, flags)
+    return GLOBAL_IMG_CACHE[filename]
+
+cv2.imread = _cached_imread
+
 IMG_EXTENSIONS = [".png", ".jpg", ".jpeg", ".tif"]
 
 
