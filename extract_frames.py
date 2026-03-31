@@ -1,3 +1,5 @@
+# pyre-ignore-all-errors
+# pyright: reportMissingImports=false, reportGeneralTypeIssues=false
 import os
 import cv2  # type: ignore
 import glob
@@ -20,11 +22,14 @@ def extract_videos(in_dir, out_dir):
             frame_idx += 1
         cap.release()
 
+import sys
 if __name__ == '__main__':
-    in_base_path = r"C:\Users\Anay\.gemini\antigravity\scratch\vad\Avenue_Extracted\Avenue Dataset"
-    out_base_path = r"C:\Users\Anay\.gemini\antigravity\scratch\vad\Avenue_Extracted\Avenue Dataset"
+    in_base_path = sys.argv[1] if len(sys.argv) > 1 else r"C:\Users\Anay\.gemini\antigravity\scratch\vad\Avenue_Extracted\Avenue Dataset"
+    out_base_path = sys.argv[2] if len(sys.argv) > 2 else in_base_path
+    train_dir = "training_vol" if os.path.exists(os.path.join(in_base_path, "training_vol")) else "training_videos"
+    test_dir = "testing_vol" if os.path.exists(os.path.join(in_base_path, "testing_vol")) else "testing_videos"
     print("Extracting train videos...")
-    extract_videos(os.path.join(in_base_path, "training_videos"), os.path.join(out_base_path, "train", "frames"))
+    extract_videos(os.path.join(in_base_path, train_dir), os.path.join(out_base_path, "train", "frames"))
     print("Extracting test videos...")
-    extract_videos(os.path.join(in_base_path, "testing_videos"), os.path.join(out_base_path, "test", "frames"))
+    extract_videos(os.path.join(in_base_path, test_dir), os.path.join(out_base_path, "test", "frames"))
     print("Done")

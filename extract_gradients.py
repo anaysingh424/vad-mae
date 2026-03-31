@@ -1,3 +1,5 @@
+# pyre-ignore-all-errors
+# pyright: reportMissingImports=false, reportGeneralTypeIssues=false
 import glob
 import os
 
@@ -41,7 +43,7 @@ def compute_gradients(data_root_folder, step, folder):
                                                         os.path.basename(img_path)))
 
 if __name__=="__main__":
-    root_folder_avenue = r"C:\Users\Anay\.gemini\antigravity\scratch\Avenue Dataset"
-    root_folder_shanghai = "/home/alin/datasets/SanhaiTech"
+    import sys
+    root_folder_avenue = sys.argv[1] if len(sys.argv) > 1 else r"C:\Users\Anay\.gemini\antigravity\scratch\vad\Avenue_Extracted\Avenue Dataset"
     compute_gradients(root_folder_avenue, 1, "train")
     compute_gradients(root_folder_avenue, 1, "test")
