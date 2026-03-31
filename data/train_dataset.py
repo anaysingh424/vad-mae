@@ -17,7 +17,10 @@ def _cached_imread(filename, flags=None):
     if not ENABLE_RAM_CACHE:
         return _original_imread(filename) if flags is None else _original_imread(filename, flags)
     if filename not in GLOBAL_IMG_CACHE:
-        GLOBAL_IMG_CACHE[filename] = _original_imread(filename) if flags is None else _original_imread(filename, flags)
+        img = _original_imread(filename) if flags is None else _original_imread(filename, flags)
+        if img is not None and img.shape[:2] != (160, 320):
+            img = cv2.resize(img, (320, 160))
+        GLOBAL_IMG_CACHE[filename] = img
     return GLOBAL_IMG_CACHE[filename]
 
 cv2.imread = _cached_imread
