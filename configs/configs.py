@@ -1,3 +1,6 @@
+# pyre-ignore-all-errors
+# pyright: reportMissingImports=false, reportGeneralTypeIssues=false
+import os
 import ml_collections  # type: ignore
 
 
@@ -25,9 +28,10 @@ def get_configs_avenue():
     config.clip_grad = 0.05
 
     # Dataset parameters
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config.dataset = "avenue"
-    config.avenue_path = r"C:\Users\Anay\.gemini\antigravity\scratch\vad\Avenue_Extracted\Avenue Dataset"
-    config.avenue_gt_path = r"C:\Users\Anay\.gemini\antigravity\scratch\vad\data\avenue\gt_txt_labels"
+    config.avenue_path = os.path.join(project_root, "Avenue_Extracted", "Avenue Dataset")
+    config.avenue_gt_path = os.path.join(project_root, "data", "avenue", "gt_txt_labels")
     config.percent_abnormal = 0.0
     config.input_3d = True
     config.device = "cuda"
